@@ -65,24 +65,24 @@ public class TaSRM_V3 {
 	int maxConsequentSize = Integer.MAX_VALUE;
 	
 	// query rule
-    ArrayList<Integer> XQuery = new ArrayList<Integer>();
-    ArrayList<Integer> YQuery = new ArrayList<Integer>(); 
+   	ArrayList<Integer> XQuery = new ArrayList<Integer>();
+   	ArrayList<Integer> YQuery = new ArrayList<Integer>(); 
     
-    // a map to record sid and matching position of a sequence
-    // HashMap<Integer, Pair<Integer, Integer>> matchPosMap = new HashMap<Integer, Pair<Integer, Integer>>(); // not pair class
-    HashMap<Integer, ArrayList<Integer>> matchPosMap = new HashMap<Integer, ArrayList<Integer>>();
+    	// a map to record sid and matching position of a sequence
+    	// HashMap<Integer, Pair<Integer, Integer>> matchPosMap = new HashMap<Integer, Pair<Integer, Integer>>(); // not pair class
+    	HashMap<Integer, ArrayList<Integer>> matchPosMap = new HashMap<Integer, ArrayList<Integer>>();
     
-    // leftCount and rightCount
-    HashMap<Integer, Integer> leftCount = new HashMap<Integer, Integer>();
-    HashMap<Integer, Integer> rightCount = new HashMap<Integer, Integer>();
+    	// leftCount and rightCount
+    	HashMap<Integer, Integer> leftCount = new HashMap<Integer, Integer>();
+    	HashMap<Integer, Integer> rightCount = new HashMap<Integer, Integer>();
     
-    // expand count
-    double expandCount = 0;
+    	// expand count
+    	double expandCount = 0;
     
-    // strategy
-    boolean UIP = true;
-    boolean URP = true;
-    boolean UEIP = true;
+    	// strategy
+    	boolean UIP = true;
+    	boolean URP = true;
+    	boolean UEIP = true;
 
 	/**
 	 * Default constructor
@@ -234,11 +234,7 @@ public class TaSRM_V3 {
 				Map<Integer,Occurence> occurencesJ = mapItemCount.get(intJ);
 				// get the tidset of item J
 				Set<Integer> tidsJ = occurencesJ.keySet();
-
-//				
-				// (1) We will now calculate the tidsets
-				// of I -->J  and the rule J-->I.
-				
+		
 				// initialize the sets
 				Set<Integer> tidsIJ = new HashSet<Integer>();  // tidset of  I -->J  
 				Set<Integer> tidsJI = new HashSet<Integer>(); // tidset of J-->I
@@ -254,7 +250,6 @@ public class TaSRM_V3 {
 					}
 				}
 				
-				// CountMap
 				if(leftCount.get(intI) < minsuppRelative || rightCount.get(intJ) < minsuppRelative) {
 					pruneIJ = true;
 				}
@@ -266,7 +261,6 @@ public class TaSRM_V3 {
 					continue;
 				}
 				
-				// for each occurence of I
 				for(Entry<Integer, Occurence> entryOccI : occurencesI.entrySet()){
 					// get the occurence of J in the same sequence
 					Occurence occJ = occurencesJ.get(entryOccI.getKey());
@@ -299,9 +293,6 @@ public class TaSRM_V3 {
 					}
 				}
 				
-				// (2) check if the two itemsets have enough common tids
-				// if not, we don't need to generate a rule for them.
-				
 				// create rule IJ
 				if(!pruneIJ && tidsIJ.size() >= minsuppRelative){
 					// calculate the confidence of I ==> J
@@ -313,7 +304,6 @@ public class TaSRM_V3 {
 					int[] itemsetJ = new int[1];
 					itemsetJ[0]= intJ;
 					
-					// gensgen
 					// two matching flag for UEIP
 					int xMatch = 0;
 					int yMatch = 0;
@@ -1041,7 +1031,7 @@ itemLoop:	for(int k=0; k < endPos; k++){
 	 * Print statistics about the last algorithm execution to System.out.
 	 */
 	public void printStats() {
-		System.out.println("=============  TaSRM_V3 - STATS ========");
+		System.out.println("===============  TaSRM - STATS ==========");
 		System.out.println("Sequential rules count: " + ruleCount);
 		System.out.println("Target sequential rules count: " + validCount);
 		System.out.println("Expand count: " + expandCount);
